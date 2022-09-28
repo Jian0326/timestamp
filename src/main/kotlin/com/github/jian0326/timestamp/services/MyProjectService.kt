@@ -1,7 +1,7 @@
-package org.jetbrains.plugins.template.services
+package com.github.jian0326.timestamp.services
 
 import com.intellij.openapi.project.Project
-import org.jetbrains.plugins.template.MyBundle
+import com.github.jian0326.timestamp.MyBundle
 
 class MyProjectService(project: Project) {
 

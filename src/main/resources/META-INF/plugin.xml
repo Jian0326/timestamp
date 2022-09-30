@@ -1,18 +1,14 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.jian0326.timestamp</id>
-    <name>timestamp</name>
-    <vendor>jian0326</vendor>
+    <id>com.cjian.timestamp</id>
+    <name>Timestamp</name>
+    <vendor email="chen5496@qq.com">cjian</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.jian0326.timestamp.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.jian0326.timestamp.services.MyProjectService"/>
+        <toolWindow id="timestamp" icon="/icons/time.png" anchor="bottom" secondary="true"
+                    doNotActivateOnStart="true"
+                    factoryClass="com.cjian.timestamp.window.ToolWindowFactory"/>
     </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.jian0326.timestamp.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
 </idea-plugin>

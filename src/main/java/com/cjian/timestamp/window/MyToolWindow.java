@@ -3,6 +3,7 @@ package com.cjian.timestamp.window;
 import com.intellij.openapi.wm.ToolWindow;
 
 import javax.swing.*;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,13 +46,13 @@ public class MyToolWindow {
 
     private void calculationResult() {
         if (textField1.getText().length() < 10 || textField2.getText().length() < 10) return;
-        int t1 = Integer.parseInt(textField1.getText());
-        int t2 = Integer.parseInt(textField2.getText());
-        int t3 = Math.abs(t1 - t2);
-        int day = t3 / 86400;
-        int hour = t3 % 86400 / 3600;
-        int min = t3 % 3600 / 60;
-        int sec = t3 % 60;
+        long t1 = new BigInteger(textField1.getText(),10).longValue();
+        long t2 = new BigInteger(textField2.getText(),10).longValue();
+        long t3 = Math.abs(t1 - t2);
+        long day = t3 / 86400;
+        long hour = t3 % 86400 / 3600;
+        long min = t3 % 3600 / 60;
+        long sec = t3 % 60;
         result.setText(String.format("%d[day] %d:%d:%d", day, hour, min, sec));
     }
 
@@ -88,7 +89,7 @@ public class MyToolWindow {
     private void timestampToTime() {
         if (textTimestamp.getText().length() < 10) return;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date d = new Date(Integer.parseInt(textTimestamp.getText()) * 1000L);
+        Date d = new Date(new BigInteger(textTimestamp.getText(),10).longValue() * 1000L);
         date.setText(dateFormat.format(d));
     }
 }

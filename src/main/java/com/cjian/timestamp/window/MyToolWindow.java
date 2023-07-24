@@ -13,7 +13,7 @@ public class MyToolWindow {
     private JButton transformation1;
     private JPanel myToolWindowContent;
     private JTextField textDate;
-    private JLabel timestamp;
+    private JTextField timestamp;
     private JLabel curDate;
 
     private JButton transformation2;

@@ -1,5 +1,5 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
-<idea-plugin>
+<idea-plugin require-restart="false">
     <id>com.cjian.timestamp</id>
     <name>Timestamp</name>
     <vendor email="chen5496@qq.com">cjian</vendor>
@@ -11,4 +11,11 @@
                     doNotActivateOnStart="true"
                     factoryClass="com.cjian.timestamp.window.ToolWindowFactory"/>
     </extensions>
+    <extensionPoints>
+        <extensionPoint
+                beanClass="com.cjian.timestamp.window.ToolWindowFactory"
+                name="timestamp"
+                dynamic="true">
+        </extensionPoint>
+    </extensionPoints>
 </idea-plugin>

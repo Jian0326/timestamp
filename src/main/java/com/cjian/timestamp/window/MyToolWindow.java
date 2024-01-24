@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class MyToolWindow {
@@ -46,8 +48,8 @@ public class MyToolWindow {
 
     private void calculationResult() {
         if (textField1.getText().length() < 10 || textField2.getText().length() < 10) return;
-        long t1 = new BigInteger(textField1.getText(),10).longValue();
-        long t2 = new BigInteger(textField2.getText(),10).longValue();
+        long t1 = new BigInteger(textField1.getText(), 10).longValue();
+        long t2 = new BigInteger(textField2.getText(), 10).longValue();
         long t3 = Math.abs(t1 - t2);
         long day = t3 / 86400;
         long hour = t3 % 86400 / 3600;
@@ -75,7 +77,9 @@ public class MyToolWindow {
     private void currentDateTime() {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        curDate.setText(dateFormat.format(date));
+        LocalDate localDate = date.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+        DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+        curDate.setText(dateFormat.format(date) + "week(" + dayOfWeek.getValue() + ")");
     }
 
     // Time to timestamp
@@ -89,7 +93,9 @@ public class MyToolWindow {
     private void timestampToTime() {
         if (textTimestamp.getText().length() < 10) return;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date d = new Date(new BigInteger(textTimestamp.getText(),10).longValue() * 1000L);
-        date.setText(dateFormat.format(d));
+        Date d = new Date(new BigInteger(textTimestamp.getText(), 10).longValue() * 1000L);
+        LocalDate localDate = d.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+        DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+        date.setText(dateFormat.format(d) + "week(" + dayOfWeek.getValue() + ")");
     }
 }

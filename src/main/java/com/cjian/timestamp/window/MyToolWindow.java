@@ -84,7 +84,13 @@ public class MyToolWindow {
 
     // Time to timestamp
     private void timeToTimestamp() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        if (textDate.getText().length() == 10) {
+            pattern = "yyyy-MM-dd";
+        } else if (textDate.getText().length() <= 7) {
+            pattern = "yyyy-MM";
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
         Date date = dateFormat.parse(textDate.getText());
         timestamp.setText(String.valueOf(date.getTime() / 1000));
     }
@@ -92,8 +98,12 @@ public class MyToolWindow {
     // timestamp to time
     private void timestampToTime() {
         if (textTimestamp.getText().length() < 10) return;
+        long l = 1000L;
+        if (textTimestamp.getText().length() >= 13){
+            l = 1l;
+        }
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date d = new Date(new BigInteger(textTimestamp.getText(), 10).longValue() * 1000L);
+        Date d = new Date(new BigInteger(textTimestamp.getText(), 10).longValue() * l);
         LocalDate localDate = d.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
         DayOfWeek dayOfWeek = localDate.getDayOfWeek();
         date.setText(dateFormat.format(d) + "week(" + dayOfWeek.getValue() + ")");
